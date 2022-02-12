@@ -1,5 +1,5 @@
-package com.task.demo.controller;
 
+package com.task.demo.controller;
 import static net.bytebuddy.matcher.ElementMatchers.is;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.hasSize;
@@ -34,13 +34,17 @@ class UserControllerUnitTest {
     @Test
     void getTopResultOfUser() throws Exception {
         UserDto user1 = new UserDto();
-        user1.setUserId(1l);
-        user1.setLevelId(1l);
-        user1.setResult(1l);
-        when(userService.findTop20ByUserId(user1.getUserId())).thenReturn(List.of(user1));
+        user1.setUserId(1L);
+        user1.setLevelId(1L);
+        user1.setResult(1L);
+        UserDto user2 = new UserDto();
+        user2.setUserId(1L);
+        user2.setLevelId(1L);
+        user2.setResult(1L);
+        when(userService.findTop20ByUserId(user1.getUserId())).thenReturn(List.of(user1, user2));
 
         mockMvc.perform(
-                        MockMvcRequestBuilders.get("/user/userinfo/1").contentType(MediaType.APPLICATION_JSON)).
+                        MockMvcRequestBuilders.get("/userinfo/1").contentType(MediaType.APPLICATION_JSON)).
                 andExpect(status().isOk()).
                 andExpect(jsonPath("$.*", hasSize(2))).
                 andExpect((ResultMatcher) jsonPath("$[0].user_id", is("1"))).

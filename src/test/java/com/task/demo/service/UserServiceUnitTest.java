@@ -6,9 +6,12 @@ import com.task.demo.model.mapper.UserMapper;
 import com.task.demo.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -23,6 +26,7 @@ public class UserServiceUnitTest {
 
     @InjectMocks
     private UserService userService;
+
 
     @Test
     public void findTop20ByUserId_worksCorrectly(){
@@ -42,14 +46,14 @@ public class UserServiceUnitTest {
 
     @Test
     public void saveUser_worksCorrectly(){
-        UserDto user = new UserDto();
-        user.setUserId(1L);
-        user.setLevelId(1L);
-        user.setResult(1L);
+        UserDto userDto = new UserDto(1L, 1L, 1L);
 
-        userService.saveUser(user);
+        userService.saveUser(userDto);
 
-        verify(userRepository, times(1)).save(any());
+         //ArgumentCaptor<UserDto> saveCapture = ArgumentCaptor.forClass(UserDto.class);
+         verify(userRepository).save(any());
+         //UserDto actual = saveCapture.getValue();
+         //assertThat(actual.getUserId()).isEqualTo(1L);
     }
 
 

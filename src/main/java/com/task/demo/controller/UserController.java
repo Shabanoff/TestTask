@@ -5,7 +5,6 @@ import com.task.demo.model.entity.User;
 import com.task.demo.model.mapper.UserMapper;
 import com.task.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +30,6 @@ public class UserController {
         return userMapper.usersToUsersDto(userService.findTop20ByLevelId(level_id));
     }
 
-    @SneakyThrows
     @PostMapping("/setinfo/")
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto setInfo(@Validated(UserDto.class) @RequestBody UserDto userDto){

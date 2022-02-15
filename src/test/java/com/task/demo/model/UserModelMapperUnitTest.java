@@ -3,12 +3,14 @@ package com.task.demo.model;
 import com.task.demo.model.dto.UserDto;
 import com.task.demo.model.entity.User;
 import com.task.demo.model.mapper.UserMapper;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Tag("unit")
 @SpringBootTest
 public class UserModelMapperUnitTest {
 
